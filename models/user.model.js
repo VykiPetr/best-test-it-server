@@ -21,10 +21,13 @@ const userSchema = new Schema(
       String,
 
     },
-
     userImage: {
       type: String,
     },
+    projects: [{
+      type: Schema.Types.ObjectId, 
+      ref: 'Project'
+    }],
   },
   {
     timestamps: true,

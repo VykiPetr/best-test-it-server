@@ -7,7 +7,6 @@ const commentSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: 'User'
     },
-
     commentBody: {
       type: String,
     },
@@ -18,13 +17,14 @@ const commentSchema = new Schema(
     replies:[{
       type: Object,
     }],
-
     creatorCheck: {
       type: Boolean
     },
-
+    projectVersion: {
+      type: String
+    },
     //Does the user is version commenting on go in this model? Added project version to project model. 
-
+    //Yes Ross it goes here
   },
 
   {

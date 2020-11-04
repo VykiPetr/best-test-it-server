@@ -29,7 +29,6 @@ const userProjectSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: 'User'
     }],
-
     projectVersion: {
       type: String,
     }
@@ -40,4 +39,4 @@ const userProjectSchema = new Schema(
 
 userProjectSchema.index({'appName': 1}, {unique:true});
 
-module.exports = model('Projects', userProjectSchema)
+module.exports = model('Project', userProjectSchema)
