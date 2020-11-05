@@ -1,11 +1,14 @@
 const express = require("express");
-const router = require.Router();
+const router = express.Router();
 
-const brcypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 const UserModel = require("../models/user.model");
 
 const { isLoggedIn } = require("../helpers/auth-helper");
+
+
+
 
 router.post('/signup', (req, res) => {
   const {username, email, password } = req.body;
