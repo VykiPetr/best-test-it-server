@@ -17,7 +17,7 @@ People can leave their feedback on bugs they found, any features they like or di
 - / - Homepage
 - /signup - Signup form
 - /login - Login form
-- /projects - restaurant list
+- /projects - projects list
 - /projects/:userId/create - Add a project in a form  
 - /projects/:id - project in detail
 - /profile/:id - View a profile if its your profile have edit(and other) buttons
@@ -112,17 +112,11 @@ People can leave their feedback on bugs they found, any features they like or di
 ## Services
 
 - Auth Service
-  - auth.login(user)
+  - auth.signin(user)
   - auth.signup(user)
   - auth.logout()
   - auth.me()
-  - auth.getUser() // synchronous
-- Restaurant Service
-  - restaurant.list()
-  - restaurant.create(data)
-  - restaurant.detail(id)
-  - restaurant.addFavorite(id)
-  - restaurant.removeFavorite(id)   
+  - auth.getUser() // synchronous  
 
 # Server
 
@@ -174,7 +168,7 @@ projectVersion - String
     - username
     - email
     - password
-- POST /api/login
+- POST /api/signin
   - body:
     - email
     - password
@@ -190,7 +184,7 @@ projectVersion - String
     - userImage
     - projects
 
-- POST /api/profile/:id/edit
+- POST /api/profile/:id (edit)
   - body:
     - mySkills
     - aboutMe
@@ -199,7 +193,7 @@ projectVersion - String
 
 
 # Project
-- GET /api/project/:id
+- GET /api/project/:id (read)
   - body:
     - userRefId
     - appName
@@ -210,7 +204,17 @@ projectVersion - String
     - likes [{}]
     - projectVersion
 
-- POST /api/project/:id/create
+- POST /api/project/:id (create)
+  - body:
+    - userRefId
+    - appName
+    - appDescription
+    - appTools
+    - appLogo,
+    - projectVersion
+    - appUrl
+
+- PATCH /api/project/:id (edit)
   - body:
     - userRefId
     - appName
@@ -219,21 +223,14 @@ projectVersion - String
     - appLogo,
     - projectVersion
 
-- POST /api/project/:id/edit
-  - body:
-    - userRefId
-    - appName
-    - appDescription
-    - appTools
-    - appLogo,
-    - projectVersion
+- DELETE /api/project/:id (delete)
 
 - POST /api/project/:projectId/:userId/like
   - push projectId.likes[{userId}]
 
 # Comment
 
-- POST /api/comment/:projectId/create
+- POST /api/comment/:projectId (create)
   - body:
     - userRefId
     - commentBody
@@ -241,13 +238,13 @@ projectVersion - String
     - projectVersion
   - push to :projectId.comments
 
-- POST /api/comment/:commentId/reply
+- POST /api/comment/:commentId (reply)
   - body:
     - userRefId
     - commentBody
   - push to :commentId.replies[{body}]
 
-- DELETE /api/comment/:commentId/:userId/delete
+- DELETE /api/comment/:commentId/:userId (delete)
   - delete based on if userId is the same as comment owner Id
 
 # File upload
