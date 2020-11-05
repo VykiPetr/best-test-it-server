@@ -24,7 +24,7 @@ const commentSchema = new Schema(
       type: String
     },
     //Does the user is version commenting on go in this model? Added project version to project model. 
-    //Yes Ross it goes here
+    //Yes Ross, it goes here...
   },
 
   {
