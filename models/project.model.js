@@ -10,23 +10,26 @@ const userProjectSchema = new Schema(
       type: String, 
       required: true,
     },
-
     appDescription: {
       type: String, 
     },
-
-    appTools: {
+    appTools: [{
+      type: String,
+      //enum
+    }],
+    deploymentLink: {
       type: String,
     },
-    appUrl: {
+    repoLink: {
       type: String,
     },
     appLogo: {
       type: String,
     },
-    comments: {
-      type: Array,
-    },
+    // comments: [{
+    //   type: Schema.Types.ObjectId, 
+    //   ref: 'Comment'    //reffrencing the comments from their project id in the comment model
+    // }],
     likes: [{
       type: Schema.Types.ObjectId, 
       ref: 'User'

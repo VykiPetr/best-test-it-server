@@ -15,7 +15,7 @@ const commentSchema = new Schema(
       enum: [...flagList]
     },
     replies:[{
-      type: Object,
+      type: Object, //backlog
     }],
     creatorCheck: {
       type: Boolean

@@ -3,8 +3,8 @@ const {Schema, model} = require('mongoose')
 const userSchema = new Schema(
   {
     username: {
-    type: String,
-    required: [true, 'Please enter a username']
+      type: String,
+      required: [true, 'Please enter a username']
     },
     email: {
       type: String, 
@@ -19,15 +19,10 @@ const userSchema = new Schema(
     },
     mySkills: {
       String,
-
     },
     userImage: {
       type: String,
     },
-    projects: [{
-      type: Schema.Types.ObjectId, 
-      ref: 'Project'
-    }],
   },
   {
     timestamps: true,

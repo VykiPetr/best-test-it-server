@@ -116,12 +116,8 @@ People can leave their feedback on bugs they found, any features they like or di
   - auth.signup(user)
   - auth.logout()
   - auth.me()
-<<<<<<< HEAD
   - auth.getUser() // synchronous
 
-=======
-  - auth.getUser() // synchronous  
->>>>>>> 17537967886208d98d130c8cba71ab1fbcf5e6ab
 
 # Server
 
@@ -147,6 +143,8 @@ appDescription - String
 appTools - String
 appLogo - String
 comments - Array
+deploymentLink - String
+repoLink - String
 likes - Array of Objects // ObjectID<User>
 projectVersion - String
 
@@ -173,10 +171,12 @@ projectVersion - String
     - username
     - email
     - password
+
 - POST /api/signin
   - body:
     - email
     - password
+
 - POST /api/logout
   - body: (empty)
 
@@ -189,7 +189,7 @@ projectVersion - String
     - userImage
     - projects
 
-- POST /api/profile/:id (edit)
+- PATCH /api/profile/:id (edit)
   - body:
     - mySkills
     - aboutMe

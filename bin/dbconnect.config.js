@@ -11,7 +11,7 @@ let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/BestTest
 
 mongoose.connect(MONGODB_URI, configOptions)
   .then(() => {
-    console.log('Databse is connected boys, we may proceed')
+    console.log('Database is connected boys, we may proceed')
   })
   .catch(() => {
     console.log('Something went wrong! Check db configurations and files!')
