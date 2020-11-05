@@ -18,7 +18,9 @@ const userProjectSchema = new Schema(
     appTools: {
       type: String,
     },
-
+    appUrl: {
+      type: String,
+    },
     appLogo: {
       type: String,
     },

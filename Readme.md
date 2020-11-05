@@ -117,12 +117,7 @@ People can leave their feedback on bugs they found, any features they like or di
   - auth.logout()
   - auth.me()
   - auth.getUser() // synchronous
-- Restaurant Service
-  - restaurant.list()
-  - restaurant.create(data)
-  - restaurant.detail(id)
-  - restaurant.addFavorite(id)
-  - restaurant.removeFavorite(id)   
+
 
 # Server
 
