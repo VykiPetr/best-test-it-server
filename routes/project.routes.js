@@ -7,17 +7,32 @@ let ProjectModel = require("../models/project.model");
 
 //view all projects
 router.get('/project', isLoggedIn, (req,res) =>{
-  ProjectModel.findById(req.params.id)
-    .then((resonse) => {
+  ProjectModel.find()
+    .then((response) => {
       res.status(200).json(response);
     })
     .catch((err) => {
       res.status(500).json({
-        error: "Something went wrong in get project",
+        error: "Something went wrong in get all projects",
         message: err,
       });
     });
 });
+
+//view project
+router.get('/project/:id', isLoggedIn, (req,res) => {
+  ProjectModel.findById(req.params.id)
+  .then((response) => {
+    res.status(200).json(response)
+  })
+  .catch((err) => {
+    res.status(500).json({
+      error: 'Something went wrong with get a project',
+      message: err
+
+    })
+  })
+})
 
 
 
