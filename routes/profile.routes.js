@@ -8,7 +8,7 @@ let UserModel = require("../models/user.model");
 //view profile
 router.get('/profile/:id', isLoggedIn, (req, res) => {
   UserModel.findById(req.params.id)
-    .then((resonse) => {
+    .then((response) => {
       res.status(200).json(response);
     })
     .catch((err) => {

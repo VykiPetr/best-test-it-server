@@ -19,7 +19,7 @@ router.get('/project', isLoggedIn, (req,res) =>{
     });
 });
 
-
+//view project
 router.get('/project/:id', isLoggedIn, (req,res) => {
   ProjectModel.findById(req.params.id)
   .then((response) => {
