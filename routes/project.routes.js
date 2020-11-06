@@ -23,9 +23,9 @@ router.get('/project', isLoggedIn, (req,res) =>{
 
 //create project
 router.post('project/:id/create', isLoggedIn, (req, res) =>{
-  const {userRefId, appName, appDescription, appTools, deploymentLink, repoLink, appLogo, likes, projectVersion} = req.body;
-
-  ProjectModel.create({appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
+  const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
+  const userRefId = req.params.id
+  ProjectModel.create({userRefId ,appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
   .then((response) => {
     res.status(200).json(response)
   })
@@ -41,9 +41,9 @@ router.post('project/:id/create', isLoggedIn, (req, res) =>{
 //edit your project
 router.patch('project/:id/edit', isLoggedIn, (req, res) => {
   let id = req.params.id
-  const {userRefId, appName, appDescription, appTools, deploymentLink, repoLink, appLogo, likes, projectVersion} = req.body;
+  const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
 
-  ProjectModel.findByIdAndUpdate(id, {set: {appName: appName, appDescription: appDescription, appTools: appTools, deploymentLink: deploymentLink, repoLink: repoLink, appLogo: appLogo, likes: likes, projectVersion: projectVersion}})
+  ProjectModel.findByIdAndUpdate(id, {set: {appName: appName, appDescription: appDescription, appTools: appTools, deploymentLink: deploymentLink, repoLink: repoLink, appLogo: appLogo, projectVersion: projectVersion}})
   .then((response) => {
     res.status(200).json(response)
   })
