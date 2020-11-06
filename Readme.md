@@ -49,6 +49,8 @@ People can leave their feedback on bugs they found, any features they like or di
     - projects
     - profile
 
+    
+
 - ProjectList
   - Inputs
     - userId for displaying on profile
@@ -66,7 +68,7 @@ People can leave their feedback on bugs they found, any features they like or di
   - Outputs
     - sign up form
 
-- Login
+- SignIn
   - Inputs
   - Outputs
     - login form

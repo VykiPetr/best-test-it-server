@@ -6,7 +6,7 @@ let UserModel = require("../models/user.model");
 
 
 //view profile
-router.get('/profile/:id', isLoggedIn, (req, res) => {
+router.get('/profile/:id', (req, res) => {
   UserModel.findById(req.params.id)
     .then((response) => {
       res.status(200).json(response);

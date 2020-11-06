@@ -6,7 +6,7 @@ let ProjectModel = require("../models/project.model");
 
 
 //view all projects
-router.get('/project', isLoggedIn, (req,res) =>{
+router.get('/project', (req,res) =>{
   ProjectModel.find()
     .then((response) => {
       res.status(200).json(response);
@@ -20,7 +20,7 @@ router.get('/project', isLoggedIn, (req,res) =>{
 });
 
 //view project
-router.get('/project/:id', isLoggedIn, (req,res) => {
+router.get('/project/:id', (req,res) => {
   ProjectModel.findById(req.params.id)
   .then((response) => {
     res.status(200).json(response)
