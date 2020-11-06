@@ -37,11 +37,14 @@ router.get('/project/:id', (req,res) => {
 
 
 //create project
-router.post('project/:id/create', isLoggedIn, (req, res) =>{
+router.post('/project/create', /*isLoggedIn,*/ (req, res) =>{
   const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
-  const userRefId = req.params.id
+  const userRefId = req.session.loggedInUser._id //dont need id param, use session id. 
+
+  
   ProjectModel.create({userRefId ,appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
   .then((response) => {
+    
     res.status(200).json(response)
   })
   .catch((err) => {
@@ -54,11 +57,12 @@ router.post('project/:id/create', isLoggedIn, (req, res) =>{
 })
 
 //edit your project
-router.patch('project/:id/edit', isLoggedIn, (req, res) => {
-  let id = req.params.id
+router.patch('/project/:id/edit', /*isLoggedIn,*/ (req, res) => {
   const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
+  const userRefId = req.session.loggedInUser._id
+  const id = req.params.id //not sure which to use.  In postman, it will edit if you use the _id from mongo, but wont work with userRefId. So, not sure how I should be calling it. req body _id?
 
-  ProjectModel.findByIdAndUpdate(id, {set: {appName: appName, appDescription: appDescription, appTools: appTools, deploymentLink: deploymentLink, repoLink: repoLink, appLogo: appLogo, projectVersion: projectVersion}})
+  ProjectModel.findByIdAndUpdate(id, {$set: {appName: appName, appDescription: appDescription, appTools: appTools, deploymentLink: deploymentLink, repoLink: repoLink, appLogo: appLogo, projectVersion: projectVersion}})
   .then((response) => {
     res.status(200).json(response)
   })
@@ -70,3 +74,5 @@ router.patch('project/:id/edit', isLoggedIn, (req, res) => {
     })
   })
 })
+
+module.exports = router

@@ -26,10 +26,10 @@ const userProjectSchema = new Schema(
     appLogo: {
       type: String,
     },
-    // comments: [{
-    //   type: Schema.Types.ObjectId, 
-    //   ref: 'Comment'    //reffrencing the comments from their project id in the comment model
-    // }],
+    comments: [{
+      type: Schema.Types.ObjectId, 
+      ref: 'Comment'    //reffrencing the comments from their project id in the comment model
+    }],
     likes: [{
       type: Schema.Types.ObjectId, 
       ref: 'User'

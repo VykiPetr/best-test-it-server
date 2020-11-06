@@ -49,11 +49,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authRoutes = require('./routes/auth.routes');
 app.use('/api', authRoutes);
 
-//const commentRoutes = require('./routes/comment.routes');
-//app.use('/api', commentRoutes);
+const commentRoutes = require('./routes/comment.routes');
+app.use('/api', commentRoutes);
 
 const profileRoutes = require('./routes/profile.routes');
 app.use('/api', profileRoutes);
+
+const projectRoutes = require('./routes/project.routes');
+app.use('/api', projectRoutes)
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.

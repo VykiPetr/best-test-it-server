@@ -21,11 +21,12 @@ router.get('/profile/:id', (req, res) => {
 
 
 //edit your profile
-router.post('/profile/:id', isLoggedIn, (req, res) => {
+router.post('/profile/:id',/*isLoggedIn,*/ (req, res) => {
   let id = req.params.id
   const {aboutMe, mySkills, userImage} = req.body; 
-  UserModel.findByIdAndUpdate(id, {set: {aboutMe: aboutMe, mySkills: mySkills, userImage: userImage}})
+  UserModel.findByIdAndUpdate(id, {$set: {aboutMe: aboutMe, mySkills: mySkills, userImage: userImage}})
   .then((response) => {
+    
     res.status(200).json(response)
   })
   .catch((err) => {
