@@ -23,11 +23,14 @@ router.get('/comment/:projectId', isLoggedIn, (req, res) => {
 
 router.post('/comment/:projectId', isLoggedIn, (req,res) => {
   let projectId = req.params.projectId
-  const {userRefId, commentBody, commentFlag, creatorCheck, projectVersion} 
+  const {commentBody, commentFlag, creatorCheck, projectVersion} 
   = req.body
+  const userRefId = req.session.loggedInUser._id
+  
 
   CommentModel.create({userRefId, commentBody, commentFlag, creatorCheck, projectVersion})
   .then((response) => {
+    console.log('create comment response', response)
     let commentId = response._id
     res.status(200).json(response)
     ProjectModel.findByIdAndUpdate(projectId, {$push: {comments: commentId}})
@@ -48,9 +51,20 @@ router.post('/comment/:projectId', isLoggedIn, (req,res) => {
 router.delete('/comment/:commentId', isLoggedIn, (req, res) => {
   let commentId = req.params.commentId
   let loggedInUserId = req.session.loggedInUser._id
+  console.log('this is the comment id', commentId)
+  console.log('logged in user id', loggedInUserId)
+  
 
   CommentModel.findById(commentId)
   .then((response) => {
+    //this if statement triggers if user downt match comment author. 
+    if (response.userRefId !== loggedInUserId){
+      res.status(500).json({
+                error: 'You do not have permission to delete this message',
+           })
+      return;
+    }
+    console.log('find comment by id response', response)
     if (response.userRefId == loggedInUserId){
       CommentModel.findByIdAndDelete(commentId)
       .then(() => {
@@ -59,6 +73,8 @@ router.delete('/comment/:commentId', isLoggedIn, (req, res) => {
         })
       
       })
+
+      //this catch doesnt seem to trigger if the user didnt create the message.  Find comment response = null.
       .catch((err) => {
         res.status(500).json({
           error: 'You cannot delete this comment',
