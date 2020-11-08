@@ -45,7 +45,7 @@ router.post('/signup', (req, res) => {
       console.log('Salt: ', salt);
       bcrypt.hash(password, salt)
         .then((passwordHash) => {
-          UserModel.create({email, username, passwordHash})
+          UserModel.create({email, username, passwordHash, aboutMe: '', mySkills: '', userImage: '', })
             .then((user) => {
               user.passwordHash = "***";
               req.session.loggedInUser = user;

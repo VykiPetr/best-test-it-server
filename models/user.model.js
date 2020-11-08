@@ -15,10 +15,10 @@ const userSchema = new Schema(
       required: true,
     }, 
     aboutMe: {
-      String,
+      type: String,
     },
     mySkills: {
-      String,
+      type: String,
     },
     userImage: {
       type: String,

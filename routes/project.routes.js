@@ -3,6 +3,7 @@ const { isLoggedIn } = require("../helpers/auth-helper");
 const router = express.Router();
 
 let ProjectModel = require("../models/project.model");
+let UserModel = require("../models/user.model")
 
 
 //view all projects
@@ -44,7 +45,6 @@ router.post('/project/create', /*isLoggedIn,*/ (req, res) =>{
   
   ProjectModel.create({userRefId ,appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
   .then((response) => {
-    
     res.status(200).json(response)
   })
   .catch((err) => {
@@ -73,6 +73,22 @@ router.patch('/project/:id/edit', /*isLoggedIn,*/ (req, res) => {
 
     })
   })
+})
+
+//getting all projects based on a user's ID
+router.get('/userProjects/:id', (req,res) => {
+  const userId = req.params.id
+  ProjectModel.find({userRefId: userId})
+    .then((response) => {
+      res.status(200).json(response)
+    })
+    .catch((err) =>{
+      res.status(500).json({
+        error: 'Something went wrong with getting projects basd on user id',
+        message: err,
+      })
+      console.log('Something went wrong with getting projects basd on user id', err)
+    })
 })
 
 module.exports = router
