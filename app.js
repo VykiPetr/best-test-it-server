@@ -58,10 +58,15 @@ app.use('/api', profileRoutes);
 const projectRoutes = require('./routes/project.routes');
 app.use('/api', projectRoutes)
 
+const fileUploads = require('./routes/file-upload.routes')
+app.use('/api', fileUploads)
+
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/public/index.html");
 });
+
+
 
 app.listen(process.env.PORT || 5000, '0.0.0.0', () => {
   console.log('Server is running')
