@@ -45,7 +45,7 @@ router.post('/signup', (req, res) => {
       console.log('Salt: ', salt);
       bcrypt.hash(password, salt)
         .then((passwordHash) => {
-          UserModel.create({email, username, passwordHash, aboutMe: '', mySkills: '', userImage: '', })
+          UserModel.create({email, username, passwordHash, aboutMe: '', mySkills: '', userImage: 'https://i.pinimg.com/originals/99/11/c9/9911c90154c8560f06ebe1e07a310f88.jpg', })
             .then((user) => {
               user.passwordHash = "***";
               req.session.loggedInUser = user;
@@ -132,9 +132,10 @@ router.post('/signin', (req, res) => {
 
 router.post('/logout', (req, res) => {
   req.session.destroy();
-  res
-  .status(204) //  No Content
-  .send();
+      res
+      .status(204) //  No Content
+      .json({});
+
 })
 
 //middleware checks is logged in 
