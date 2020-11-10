@@ -41,7 +41,8 @@ router.get('/project/:id', (req,res) => {
 router.post('/project/create', isLoggedIn, (req, res) =>{
   const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
   const userRefId = req.session.loggedInUser._id //dont need id param, use session id. 
-
+  console.log('in create project', appLogo)
+  console.log('in create project', appDescription)
   
   ProjectModel.create({userRefId ,appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
   .then((response) => {
@@ -53,6 +54,7 @@ router.post('/project/create', isLoggedIn, (req, res) =>{
       message: err,
 
     })
+    console.log('failed to create project', err)
   })
 })
 
