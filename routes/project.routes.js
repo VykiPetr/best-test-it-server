@@ -38,7 +38,7 @@ router.get('/project/:id', (req,res) => {
 
 
 //create project
-router.post('/project/create', /*isLoggedIn,*/ (req, res) =>{
+router.post('/project/create', isLoggedIn, (req, res) =>{
   const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
   const userRefId = req.session.loggedInUser._id //dont need id param, use session id. 
 
