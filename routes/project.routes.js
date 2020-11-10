@@ -41,7 +41,8 @@ router.get('/project/:id', (req,res) => {
 router.post('/project/create', isLoggedIn, (req, res) =>{
   const {appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion} = req.body;
   const userRefId = req.session.loggedInUser._id //dont need id param, use session id. 
-
+  console.log('in create project', appLogo)
+  console.log('in create project', appDescription)
   
   ProjectModel.create({userRefId ,appName, appDescription, appTools, deploymentLink, repoLink, appLogo, projectVersion})
   .then((response) => {
@@ -53,6 +54,7 @@ router.post('/project/create', isLoggedIn, (req, res) =>{
       message: err,
 
     })
+    console.log('failed to create project', err)
   })
 })
 
@@ -90,5 +92,24 @@ router.get('/userProjects/:id', (req,res) => {
       console.log('Something went wrong with getting projects basd on user id', err)
     })
 })
+//handling project liking
+router.post('/projectLike', (req, res) => {
+  const {userId, projectId} = req.body
+  console.log(userId)
+
+  ProjectModel.findByIdAndUpdate(projectId, {$push: { likes: userId }})
+    .then((response)=>{
+      res.status(200).json(response)
+    })
+    .catch((err) =>{
+      res.status(500).json({
+        error: 'Something went wrong in adding a like',
+        message: err,
+      })
+      console.log('Something went wrong in adding a like', err)
+    })
+
+})
+
 
 module.exports = router
