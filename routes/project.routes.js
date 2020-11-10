@@ -92,5 +92,24 @@ router.get('/userProjects/:id', (req,res) => {
       console.log('Something went wrong with getting projects basd on user id', err)
     })
 })
+//handling project liking
+router.post('/projectLike', (req, res) => {
+  const {userId, projectId} = req.body
+  console.log(userId)
+
+  ProjectModel.findByIdAndUpdate(projectId, {$push: { likes: userId }})
+    .then((response)=>{
+      res.status(200).json(response)
+    })
+    .catch((err) =>{
+      res.status(500).json({
+        error: 'Something went wrong in adding a like',
+        message: err,
+      })
+      console.log('Something went wrong in adding a like', err)
+    })
+
+})
+
 
 module.exports = router
