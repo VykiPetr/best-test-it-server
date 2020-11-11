@@ -11,8 +11,17 @@ let ProjectModel = require('../models/project.model')
 router.get('/comments/:projectId', isLoggedIn, (req, res) => {
   
   ProjectModel.findById(req.params.projectId)
-  .populate('comments')
+  .populate({ 
+    path: 'comments',
+    populate: {
+      path: 'userRefId',
+      model: 'User'
+    } 
+ })
   .then((response) => {
+    // let populatedResponse = response.comments.map((comment)=>{
+    //   return comment.populate('userRefId')
+    // })
     res.status(200).json(response);
   })
   .catch((err) => {
