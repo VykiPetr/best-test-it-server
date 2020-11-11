@@ -9,7 +9,9 @@ let UserModel = require("../models/user.model")
 //view all projects
 router.get('/project', (req,res) =>{
   ProjectModel.find()
+    .populate('userRefId')
     .then((response) => {
+      console.log(response[0].userRefId.username)
       res.status(200).json(response);
     })
     .catch((err) => {
