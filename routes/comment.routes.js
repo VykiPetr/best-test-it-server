@@ -6,9 +6,12 @@ let CommentModel = require('../models/comments.model')
 let ProjectModel = require('../models/project.model')
 
 
+//getting comments from the Project model
 
-router.get('/comment/:projectId', isLoggedIn, (req, res) => {
-  CommentModel.findById(req.params.projectId)
+router.get('/comments/:projectId', isLoggedIn, (req, res) => {
+  
+  ProjectModel.findById(req.params.projectId)
+  .populate('comments')
   .then((response) => {
     res.status(200).json(response);
   })
