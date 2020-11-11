@@ -74,7 +74,6 @@ router.patch('/project/:id/edit', /*isLoggedIn,*/ (req, res) => {
     res.status(500).json({
       error: 'Something went wrong with edit project',
       message: err,
-
     })
   })
 })
@@ -97,7 +96,6 @@ router.get('/userProjects/:id', (req,res) => {
 //handling project liking
 router.post('/projectLike', (req, res) => {
   const {userId, projectId} = req.body
-  console.log(userId)
 
   ProjectModel.findByIdAndUpdate(projectId, {$push: { likes: userId }})
     .then((response)=>{
