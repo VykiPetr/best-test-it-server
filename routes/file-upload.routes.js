@@ -7,6 +7,7 @@ router.post('/image-upload', uploader.single("imageUrl"), (req, res, next) => {
     next(new Error('No file uploaded!'));
     return;
   }
+  console.log(req.file.path)
   res.json({userImage: req.file.path})
 })
 
