@@ -11,7 +11,6 @@ router.get('/project', (req,res) =>{
   ProjectModel.find()
     .populate('userRefId')
     .then((response) => {
-      console.log(response[0].userRefId.username)
       res.status(200).json(response);
     })
     .catch((err) => {
@@ -25,7 +24,9 @@ router.get('/project', (req,res) =>{
 //view project
 router.get('/project/:id', (req,res) => {
   ProjectModel.findById(req.params.id)
+  .populate('userRefId')
   .then((response) => {
+    console.log('THIS IS HERE', response)
     res.status(200).json(response)
   })
   .catch((err) => {
